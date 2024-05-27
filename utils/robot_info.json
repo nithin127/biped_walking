@@ -1,0 +1,46 @@
+{
+ "end_effector_offset_right_x": 0.0747, 
+ "end_effector_offset_right_y": -0.0166, 
+ "end_effector_offset_left_x": 0.0747, 
+ "end_effector_offset_left_y": 0.0185,
+
+ "right_hip_torso_offset": [0.046, -0.173, -0.175],
+ "left_hip_torso_offset": [0.046, 0.173, -0.175],
+
+ "length_hip": 0.12,
+ "length_thigh": 0.26,
+ "length_shank": 0.3,
+
+ "qpos_right_leg_start_id": 7,
+ "qpos_left_leg_start_id": 10,
+ "qvel_right_leg_start_id": 6,
+ "qvel_left_leg_start_id": 9,
+
+ "qpos_right_hip_roll": 7, 
+ "qpos_right_hip_pitch": 8, 
+ "qpos_right_knee_pitch": 9, 
+ "qpos_left_hip_roll": 10, 
+ "qpos_left_hip_pitch": 11, 
+ "qpos_left_knee_pitch": 12, 
+
+ "body_start_id": 1,
+ "body_end_id": 7,
+ "body_torso_id": 1,
+ "body_right_shank_id": 4,
+ "body_left_shank_id": 7,
+
+ "geom_torso_id": 1,
+
+ "site_right_hip_id": 0,
+ "site_left_hip_id": 4,
+
+ "site_right_foot_fwd_id": 1,
+ "site_right_foot_mid_id": 2,
+ "site_right_foot_bck_id": 3,
+ "site_left_foot_fwd_id": 5,
+ "site_left_foot_mid_id": 6,
+ "site_left_foot_bck_id": 7,
+
+ "touch_sensor_right_foot_id": 0, 
+ "touch_sensor_left_foot_id": 1
+}

@@ -1,0 +1,9 @@
+*.pyc
+__pycache__
+
+*.npy
+!best*.npy
+
+diff.txt
+
+assets1

@@ -1,0 +1,87 @@
+<mujoco>
+  <compiler inertiafromgeom='auto' angle='degree' eulerseq='xyz' meshdir='meshes'/>
+  <option gravity='0 0 -9.81' iterations='50' solver='Newton' timestep='0.001'/> 
+  <asset>
+    <material name='collision' rgba='0.1 0.5 0.9 0.4'/>
+    <material name='plane' reflectance='0.000000' texrepeat='1 1' texture='plane' texuniform='true'/>
+    <material name='robot' rgba='0.9 0.5 0.1 1'/>
+    <texture builtin='checker' height='512' name='plane' rgb1='0 0 0' rgb2='0.8 0.8 0.8' type='2d' width='512'/>
+    <texture builtin='gradient' height='128' rgb1='0.4 0.6 0.8' rgb2='0 0 0' type='skybox' width='128'/>
+    <mesh name='torso' file='torso.STL'/>
+    <mesh name='hip-right' file='hip-right.STL'/>
+    <mesh name='hip-left' file='hip-left.STL'/>
+    <mesh name='thigh-right' file='thigh-right.STL'/>
+    <mesh name='thigh-left' file='thigh-left.STL'/>
+    <mesh name='shank-right' file='shank-right.STL'/>
+    <mesh name='shank-left' file='shank-left.STL'/>
+    <hfield name='terrain' nrow='501' ncol='1503' size='50.1 10.02 1 1'/>
+  </asset>
+  <default>
+    <default class='collision'>
+      <geom conaffinity='1' condim='3' contype='1' material='collision'/>
+    </default>
+    <default class='robot'>
+      <geom material='robot'/>
+    </default>
+    <equality solref='0.005 1'/>
+    <geom conaffinity='0' condim='1' contype='0' solref='0.005 1'/>
+    <motor ctrllimited='true'/>
+  </default>
+  <worldbody>
+    <light cutoff="100" diffuse="1 1 1" dir="0 0 -5" directional="true" exponent="1" pos="0 0 3" specular=".1 .1 .1"/>    
+    <geom name='terrain' friction="2" conaffinity="15" condim="3"  pos="0 0 0" euler="0 0 0" material="plane" rgba="1 1 1 1" type='hfield' hfield='terrain'/>        
+  	<body name='torso' pos='0 0 0.9' euler='0 0 0'>
+      <geom type='mesh' mesh='torso' material='robot' class='collision' density='568.18' />
+      <joint type='free' limited='false' />
+      <body name="hip-right" pos="0.046 -0.17292 -0.175" euler="-90 0 180">
+        <site name="hip-site-right" size="0.03" material="robot" pos="0 0 0" rgba="1 1 1 1"/>
+        <geom type='mesh' mesh='hip-right' material='robot' class='collision' density='365.31' />
+        <joint name="righthip" type="hinge" pos="0 0 0" axis="1 0 0" range='-60 60' limited='true' damping='1.000000' />
+        <body name="thigh-right" pos="-0.0740000000000027 -0.123217651987628 -0.0266460199474852" euler="0 90 -90">
+          <joint name="rightthigh" type="hinge" pos="0 0 0" axis="0 1 0" range='-60 60' limited='true' damping='1.000000'/>
+          <geom type='mesh' mesh='thigh-right' material='robot' class='collision' density='489.81' />
+          <body name="shank-right" pos="0.26874 0 0" euler="-180 -26.7 90">
+            <joint name="rightshank" type="hinge" pos="0 0 0" axis="1 0 0" range='-90 90' limited='true' damping='1.000000'/>
+            <geom type='mesh' mesh='shank-right' material='robot' class='collision' density='458.2' />
+            <site name="right-foot-fwd" size="0.01" pos="0.01 -0.257 -0.145" rgba="1 1 1 1" />
+            <site name="right-foot-mid" size="0.01" pos="0.01 -0.27 -0.135"/>
+            <site name="right-foot-bck" size="0.01" pos="0.01 -0.281 -0.106" rgba="1 1 1 1" />
+				</body>
+			</body>	
+    </body>
+
+    <body name="hip-left" pos="0.0459999999999952 0.17291551056438 -0.175" euler="-90 0 -180">
+      <site name="hip-site-left" size="0.03" material="robot" pos="0 0 0" rgba="1 1 1 1"/>
+      <joint name="lefthip" type="hinge" pos="0 0 0" axis="1 0 0" range='-60 60' limited='true' damping='1.000000'/>
+      <geom type='mesh' mesh='hip-left' material='robot' class='collision' density='365.31' rgba="0.7 0.3 0.6 1"/>
+      <body name="thigh-left" pos="-0.0740000000000016 -0.12321765198764 0.0285764807738391" euler="0 90 -90">
+        <joint name="leftthigh" type="hinge" pos="0 0 0" axis="0 1 0" range='-60 60' limited='true' damping='1.000000'/>
+        <geom type='mesh' mesh='thigh-left' material='robot' class='collision' density='489.81' rgba="0.7 0.3 0.6 1"/>
+        <body name="shank-left" pos="0.268740963561522 0 0" euler="180 -26.7 90">
+          <joint name="leftshank" type="hinge" pos="0 0 0" axis="1 0 0" range='-90 90' limited='true' damping='1.000000'/>
+          <geom type='mesh' mesh='shank-left' material='robot' class='collision' density='458.2' rgba="0.7 0.3 0.6 1"/>
+          <site name="left-foot-fwd" size="0.01" pos="-0.01 -0.257 -0.145" rgba="1 1 1 1" />
+          <site name="left-foot-mid" size="0.01" pos="-0.01 -0.27  -0.135"/>
+          <site name="left-foot-bck" size="0.01" pos="-0.01 -0.281 -0.106" rgba="1 1 1 1" />
+        </body>	
+      </body>	
+    </body>
+    
+  </body>  
+  </worldbody>
+  <actuator>
+    <motor name='righthip' joint='righthip' ctrllimited='true' ctrlrange='-100 100'/>
+    <motor name='rightthigh' joint='rightthigh' ctrllimited='true' ctrlrange='-100 100'/>
+    <motor name='rightshank' joint='rightshank' ctrllimited='true' ctrlrange='-100 100'/>
+    <motor name='lefthip' joint='lefthip' ctrllimited='true' ctrlrange='-100 100'/>
+    <motor name='leftthigh' joint='leftthigh' ctrllimited='true' ctrlrange='-100 100'/>
+    <motor name='leftshank' joint='leftshank' ctrllimited='true' ctrlrange='-100 100'/>
+  </actuator>
+  <sensor>
+    <framepos objtype="site" objname="right-foot-mid"/>
+    <framepos objtype="site" objname="left-foot-mid"/>
+    <touch name='touch_right_foot'  site='right-foot-mid' />
+    <touch name='touch_left_foot'  site='left-foot-mid' />
+  </sensor>
+</mujoco>
+
